@@ -5,10 +5,11 @@
 # Site
 title: エロマンガ
 subtitle:
-description:
-keywords:
+description: エロマンガのブログ
+keywords: エロマンガ,blog
 author: Izumi Sagiri
-language:
+#language: ja
+language: zh-Hans
 timezone:
 
 # URL
@@ -16,6 +17,7 @@ timezone:
 url: https://eromanga.me
 root: /
 permalink: :year/:month/:day/:title/
+#parmalink: :year/:month:/:doy/
 permalink_defaults:
 
 # Directory
@@ -73,7 +75,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -81,3 +83,17 @@ deploy:
   type: git
   repo: https://github.com/EromangaMe/eromanga.me.git
   branch: master
+
+
+
+
+
+
+
+
+
+
+
+#cnzz_siteid: 1273852620
+#livere_uid: MTAyMC8zNjk4Ni8xMzUyMg
+#baidushare: true

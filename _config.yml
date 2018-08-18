@@ -45,7 +45,7 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -75,6 +75,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
+#theme: next-reloaded
 theme: next
 
 # Deployment
@@ -83,17 +84,3 @@ deploy:
   type: git
   repo: https://github.com/EromangaMe/eromanga.me.git
   branch: master
-
-
-
-
-
-
-
-
-
-
-
-#cnzz_siteid: 1273852620
-#livere_uid: MTAyMC8zNjk4Ni8xMzUyMg
-#baidushare: true

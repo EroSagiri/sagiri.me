@@ -93,8 +93,8 @@ index_with_subtitle: false
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
   home: / || home
-  about: /about/ || user
-  tags: /tags/ || tags
+  #about: /about/ || user
+  #tags: /tags/ || tags
   #categories: /categories/ || th
   archives: /archives/ || archive
   #schedule: /schedule/ || calendar
@@ -136,8 +136,9 @@ social:
   #StackOverflow: https://stackoverflow.com/yourname || stack-overflow
   #YouTube: https://youtube.com/yourname || youtube
   #Instagram: https://instagram.com/yourname || instagram
-  GitHub: https://github.com/EromangaMe
   #Skype: skype:yourname?call|chat || skype
+  GitHub: https://github.com/EromangaMe
+  E-Mail: mailto:i@sagiri.me
 
 social_icons:
   enable: true

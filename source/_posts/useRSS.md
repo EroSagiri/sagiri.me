@@ -1,7 +1,7 @@
 ---
 title: 使用RSS
-date: 2018-08-17 21:43:54
-tags:
+date: 2018-08-19 12:10:12
+tags: 水文章
 ---
 
 ## 什么是RSS？
@@ -17,3 +17,5 @@ Windows平台推荐使用 FeedDemon [官网下载](http://www.feeddemon.com/)
 Linux平台推荐使用 雷鸟邮件 附带RSS订阅 [官网下载](https://www.thunderbird.net/)  
 
 有一些网站会提供RSS订阅，你只需点击一下RSS或图标 像这样的<img src="/images/rssico.jpg" width="50px" style="margin: 0;">
+点击之后你可能会看到一个XML格式的文件，你只需要复制浏览器地址栏的url，然后在RSS客户端添加就可以订阅了  
+如果有些网站没有RSS订阅功能，你可以看一下 [RSSHUB](https://github.com/DIYgod/RSSHub) ，它提供了很多奇奇怪怪的订阅源

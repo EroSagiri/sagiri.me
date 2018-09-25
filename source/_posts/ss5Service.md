@@ -78,5 +78,3 @@ systemctl stop ss5.service
 ```
 
 
-这是我的SOCKS服务器 `ssr.sagiri.me:1080`  
-服务器在日本可用于翻墙  

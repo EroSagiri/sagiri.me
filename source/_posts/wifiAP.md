@@ -40,7 +40,7 @@ tags:
 ```
 用wi-fi网卡虚拟一个网络接口 wlps0_ap
 ```
-sudo iw dev wlp2s0 interface add wlp2s0_ap type managed addr 12:34:56:78:ab:cd
+➜  sudo iw dev wlp2s0 interface add wlp2s0_ap type managed addr 12:34:56:78:ab:cd
 ```
 ## 开启AP
 使用create_ap用wlp2s0_ap这个网络接口开启一个热点，使用wlp2s0的网络

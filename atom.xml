@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>エロマンガ</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://eromanga.me/"/>
+  <updated>2019-05-06T13:05:51.449Z</updated>
+  <id>https://eromanga.me/</id>
+  
+  <author>
+    <name>Sagiri Izumi</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>uefi启动直接加载内核</title>
+    <link href="https://eromanga.me/2019/01/06/uefiBoot/"/>
+    <id>https://eromanga.me/2019/01/06/uefiBoot/</id>
+    <published>2019-01-06T02:55:13.000Z</published>
+    <updated>2019-05-06T13:05:51.449Z</updated>
+    
+    <content type="html"><![CDATA[<p>uefi(Unified Extensible Firmware Interface）是一种个人电脑系统规范，用来规范操作系统和系统固件之间的软件界面，作为BIOS的替换方案。<br>使用uefi直接加载内核的好处是减小启动时间。<br><a id="more"></a></p><h2 id="验证启动模式"><a href="#验证启动模式" class="headerlink" title="验证启动模式"></a>验证启动模式</h2><p>一般主板会支持两种启动模式 BIOS UEFI<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ls /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure></p><p>如果目录不存在，系统可能是BIOS模式启动的。</p><h2 id="EFI分区"><a href="#EFI分区" class="headerlink" title="EFI分区"></a>EFI分区</h2><p>要使用UEFI启动硬盘上要有一个特殊的EFI分区<br>查看分区表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ fdisk -l /dev/sda</span><br></pre></td></tr></table></figure></p><h2 id="把内核和初始化内存复制到EFI分区"><a href="#把内核和初始化内存复制到EFI分区" class="headerlink" title="把内核和初始化内存复制到EFI分区"></a>把内核和初始化内存复制到EFI分区</h2><p>内核和初始化内存一般在 /boot 目录<br>vmlinuz-linux 和 initramfs-linux.img 文件<br>如果没有挂载EFI分区，要挂载<br>复制到EFI分区 /mnt 是挂载的目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># cp /boot/&#123;vmlinuz-linux,initramfs-linux.img&#125; /mnt</span><br></pre></td></tr></table></figure></p><h2 id="添加启动项"><a href="#添加启动项" class="headerlink" title="添加启动项"></a>添加启动项</h2><p>efibootmgr 工具可以访问启动项<br>查看启动项<br>默认下会执行磁盘下的EFI分区下的/EFI/boot/bootx64.efi程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">efibootmgr</span><br></pre></td></tr></table></figure></p><p>添加一个启动项<br>-d 是EFI分区所在的设备<br>-p 是EFI的分区号<br>-c 创建一个启动项<br>-L 启动项的标签<br>-l efi程序的路径，注意要用\表示目录，列如EFI分区下的vmlinuz-linux \vmlinuz-linux<br>-u 参数 root 根目录所在的设备 rw 读写 initrd 初始化内存</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># efibootmgr -d /dev/sda -p 1 -c -L &quot;Arch Linux&quot; -l /vmlinuz-linux -u &quot;root=/dev/sda2 rw initrd=/initramfs-linux.img&quot;</span><br></pre></td></tr></table></figure><p>注意每次更新内核或生成新的初始化内存的时候要重新把内核和初始化内存镜像复制到EFI分区<br>好的解决方法把EFI分区挂载到/boot目录  </p><h2 id="调整启动顺序"><a href="#调整启动顺序" class="headerlink" title="调整启动顺序"></a>调整启动顺序</h2><p>把第一个要加载的放在前面，可使用 efibootmgr 查看编号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># efibootmgr -o 1,2,3</span><br></pre></td></tr></table></figure></p><p>参考 <a href="https://wiki.archlinux.org/index.php/EFISTUB" target="_blank" rel="noopener">EFISTUB - ArchWiki</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;uefi(Unified Extensible Firmware Interface）是一种个人电脑系统规范，用来规范操作系统和系统固件之间的软件界面，作为BIOS的替换方案。&lt;br&gt;使用uefi直接加载内核的好处是减小启动时间。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://eromanga.me/tags/linux/"/>
+    
+      <category term="uefi" scheme="https://eromanga.me/tags/uefi/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单个Wi-FI设备同时作为无线客户端和AP</title>
+    <link href="https://eromanga.me/2018/11/05/wifiAP/"/>
+    <id>https://eromanga.me/2018/11/05/wifiAP/</id>
+    <published>2018-11-05T09:10:39.000Z</published>
+    <updated>2019-05-06T13:05:51.449Z</updated>
+    
+    <content type="html"><![CDATA[<p>通过虚拟网卡实现单个设备同时作为热点和无线客户端<br>需要用到的软件 iw, create_ap, ip<br><a id="more"></a></p><h2 id="无线网卡必须支持AP模式"><a href="#无线网卡必须支持AP模式" class="headerlink" title="无线网卡必须支持AP模式"></a>无线网卡必须支持AP模式</h2><p>要验证这点，请执行 <code>iw list</code> 命令，结果Supported interface modes 段落中应该有AP模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">➜  iw list</span><br><span class="line">...</span><br><span class="line">        Supported interface modes:</span><br><span class="line">                * IBSS</span><br><span class="line">                * managed</span><br><span class="line">                * AP</span><br><span class="line">                * AP/VLAN</span><br><span class="line">                * monitor</span><br><span class="line">                * P2P-client</span><br><span class="line">                * P2P-GO</span><br><span class="line">                * P2P-device</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p><p>验证设备是否支持并行操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  iw list | grep channels</span><br><span class="line">        total &lt;= 3, #channels &lt;= 2</span><br></pre></td></tr></table></figure></p><p>约束 <code>#channels &lt;= 1</code>说明软件热点必须和wi-fi客户端连接处于同一信道  </p><h2 id="虚拟网络接口"><a href="#虚拟网络接口" class="headerlink" title="虚拟网络接口"></a>虚拟网络接口</h2><p>查看当前网卡 <code>ip address</code>, 会有一个wlan或者wlp开头的网卡<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  ip link</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">2: wlp2s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP mode DORMANT group default qlen 1000</span><br><span class="line">    link/ether 40:a3:cc:79:0e:4b brd ff:ff:ff:ff:ff:ff</span><br></pre></td></tr></table></figure></p><p>用wi-fi网卡虚拟一个网络接口 wlps0_ap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜  sudo iw dev wlp2s0 interface add wlp2s0_ap type managed addr 12:34:56:78:ab:cd</span><br></pre></td></tr></table></figure></p><h2 id="开启AP"><a href="#开启AP" class="headerlink" title="开启AP"></a>开启AP</h2><p>使用create_ap用wlp2s0_ap这个网络接口开启一个热点，使用wlp2s0的网络<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜  sudo create_ap wlp2s0_ap wlp2s0 sagiri</span><br></pre></td></tr></table></figure></p><p>这样就开启了一个SSID为sagiri，无密码的热点  </p><h2 id="连接网络"><a href="#连接网络" class="headerlink" title="连接网络"></a>连接网络</h2><p>使用wlp2s0这个网卡连接wi-fi，用图像界面就行了，命令行好麻烦的  </p><p>参考 <a href="https://wiki.archlinux.org/index.php/Software_access_point_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">archlinux Software access point</a>)</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通过虚拟网卡实现单个设备同时作为热点和无线客户端&lt;br&gt;需要用到的软件 iw, create_ap, ip&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://eromanga.me/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用ss5搭建SOCKS服务器</title>
+    <link href="https://eromanga.me/2018/09/09/ss5Service/"/>
+    <id>https://eromanga.me/2018/09/09/ss5Service/</id>
+    <published>2018-09-09T13:46:02.000Z</published>
+    <updated>2019-05-06T13:05:51.449Z</updated>
+    
+    <content type="html"><![CDATA[<p>SOCKS是一种网络传输协议，主要用于客户端与外网服务器之间通讯的中间传递。<br>当防火墙后的客户端要访问外网服务器时，就跟SOCKS代理服务器连接。这个代理服务器控制客户端访问外网的资格，允许的话，就将客户端的请求发往外部的服务器。</p><a id="more"></a><p>SOCKS服务器软件</p><ul><li>Dante Socks Server  <a href="http://www.inet.no/dante" target="_blank" rel="noopener">http://www.inet.no/dante</a></li><li>Java Socks Server <a href="http://www.inet.no/dante" target="_blank" rel="noopener">http://www.inet.no/dante</a></li><li>SOCKS4 Server  <a href="https://archive.is/20130502024508/http://www.alhem.net/project/socks4" target="_blank" rel="noopener">https://archive.is/20130502024508/http://www.alhem.net/project/socks4</a></li><li>SS5 Socks Server  <a href="http://ss5.sourceforge.net/" target="_blank" rel="noopener">http://ss5.sourceforge.net/</a></li><li>TcpToute2  <a href="https://github.com/GameXG/TcpRoute2" target="_blank" rel="noopener">https://github.com/GameXG/TcpRoute2</a></li></ul><p>使用SS5,搭建SOCKS服务主要用于翻墙,服务器系统是Centos7  </p><h2 id="去官网下载rpm包"><a href="#去官网下载rpm包" class="headerlink" title="去官网下载rpm包"></a>去官网下载rpm包</h2><p><a href="http://ss5.sourceforge.net/" target="_blank" rel="noopener">SS5官网</a> 还要跳转到sourceforge下载软件 获取到下载链接<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 下载rpm包</span><br><span class="line">wget https://jaist.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.src.rpm</span><br><span class="line"><span class="meta">#</span> 安装</span><br><span class="line">rpm -ivh ss5-3.8.9-8.src.rpm</span><br></pre></td></tr></table></figure></p><h2 id="修改SS5配置文件"><a href="#修改SS5配置文件" class="headerlink" title="修改SS5配置文件"></a>修改SS5配置文件</h2><p>编辑 <code>/etc/opt/ss5/ss5.conf</code> 文件，把找到下面两行并把注释去掉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auth    0.0.0.0/0               -              -</span><br><span class="line">permit -        0.0.0.0/0       -       0.0.0.0/0       -       -       -       -       -</span><br></pre></td></tr></table></figure></p><p>默认无用户认证<br>如果想要设置用户密码认证，则更改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auth    0.0.0.0/0               -              u</span><br><span class="line">permit u        0.0.0.0/0       -       0.0.0.0/0       -       -       -       -       -</span><br></pre></td></tr></table></figure></p><p>编辑 <code>/etc/opt/ss5/ss5.passwd</code> 添加用户和密码一行一个（用户和密码之间有个空格）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user1 123456</span><br><span class="line">user2 654321</span><br></pre></td></tr></table></figure></p><p>启动参数默认是1080端口，可在 <code>/etc/sysconfig/ss5</code>更改<br>例如改成1000端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Add startup option here</span><br><span class="line">SS5_OPTS=&quot; -u root -b 0.0.0.0:1000&quot;</span><br></pre></td></tr></table></figure></p><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start ss5.service</span><br></pre></td></tr></table></figure><h2 id="开放防火墙端口"><a href="#开放防火墙端口" class="headerlink" title="开放防火墙端口"></a>开放防火墙端口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --zone=public --add-port=1080/tcp</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>使用curl测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ curl --socks5 ssr.sagiri.me:1080 google.com</span><br><span class="line">&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;</span><br><span class="line">&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;</span><br><span class="line">&lt;H1&gt;301 Moved&lt;/H1&gt;</span><br><span class="line">The document has moved</span><br><span class="line">&lt;A HREF=&quot;http://www.google.com/&quot;&gt;here&lt;/A&gt;.</span><br><span class="line">&lt;/BODY&gt;&lt;/HTML&gt;</span><br></pre></td></tr></table></figure></p><h2 id="自启"><a href="#自启" class="headerlink" title="自启"></a>自启</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable ss5.service</span><br></pre></td></tr></table></figure><h2 id="关闭"><a href="#关闭" class="headerlink" title="关闭"></a>关闭</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop ss5.service</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;SOCKS是一种网络传输协议，主要用于客户端与外网服务器之间通讯的中间传递。&lt;br&gt;当防火墙后的客户端要访问外网服务器时，就跟SOCKS代理服务器连接。这个代理服务器控制客户端访问外网的资格，允许的话，就将客户端的请求发往外部的服务器。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://eromanga.me/tags/linux/"/>
+    
+      <category term="proxy" scheme="https://eromanga.me/tags/proxy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第一个页面</title>
+    <link href="https://eromanga.me/2018/06/01/firstPage/"/>
+    <id>https://eromanga.me/2018/06/01/firstPage/</id>
+    <published>2018-06-01T04:39:16.000Z</published>
+    <updated>2019-05-06T13:05:51.449Z</updated>
+    
+    <content type="html"><![CDATA[<p>这里是我的博客的第一个页面<br>博客托管于 <a href="https://github.com/EromangaMe/eromanga.me" target="_blank" rel="noopener">GitHub</a><br><a href="htttps://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动 主题 <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">Next</a>  </p><p>域名 <code>eromanga.me</code> 伊罗曼加镇（Eromanga）是位于澳大利亚昆士兰西南部的一个小镇<br><a id="more"></a><br><img src="/images/62748309_p0 .png" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里是我的博客的第一个页面&lt;br&gt;博客托管于 &lt;a href=&quot;https://github.com/EromangaMe/eromanga.me&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;htttps://hexo.io&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt; 强力驱动 主题 &lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Next&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;域名 &lt;code&gt;eromanga.me&lt;/code&gt; 伊罗曼加镇（Eromanga）是位于澳大利亚昆士兰西南部的一个小镇&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="公告" scheme="https://eromanga.me/tags/%E5%85%AC%E5%91%8A/"/>
+    
+  </entry>
+  
+</feed>

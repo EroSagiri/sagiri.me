@@ -222,7 +222,7 @@ avatar:
   # In theme directory (source/images): /images/avatar.gif
   # In site directory (source/uploads): /uploads/avatar.gif
   # You can also use other linking images.
-  url: #/images/avatar.gif
+  url: /images/avatar.png
   # If true, the avatar would be dispalyed in circle.
   rounded: false
   # If true, the avatar would be rotated with the cursor.
@@ -1152,7 +1152,3 @@ vendors:
 css: css
 js: js
 images: images
-
-
-#liverer
-livere_uid: MTAyMC8zNjk4Ni8xMzUyMg

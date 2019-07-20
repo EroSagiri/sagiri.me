@@ -75,12 +75,11 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next-reloaded
-#theme: next
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/EromangaMe/eromanga.me.git
+  repo: git@github.com:EromangaMe/eromanga.me.git
   branch: master

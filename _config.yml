@@ -14,7 +14,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://eromanga.me
+url: https://sagiri.me
 root: /
 permalink: :year/:month/:day/:title/
 #parmalink: :year/:month:/:doy/
@@ -81,5 +81,5 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:EromangaMe/eromanga.me.git
+  repo: git@github.com:EromangaMe/sagiri.me.git
   branch: master

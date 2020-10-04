@@ -8,13 +8,13 @@ tags:
 电子邮箱: i@sagiri.me  
 密钥指纹: D70D288199132DB1BD427C35768638AAB9B4132C  
 密钥ID: 768638AAB9B4132C  
-密钥已经上次到了 pool.sks-keyservers.net  
+密钥已经上传到了 pool.sks-keyservers.net  
 可以使用命令直接导入  
 ```
 gpg --keyserver hkp://pool.sks-keyservers.net --receive-keys 768638AAB9B4132C
 ```
 <!-- more -->
-或者复制下面的PGP导入
+或者复制下面的PGP PUBLIC KEY导入
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
